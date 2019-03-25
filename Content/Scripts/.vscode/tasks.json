@@ -1,0 +1,16 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "command": "${workspaceFolder}\\node_modules\\.bin\\tsc.cmd",
+      "label": "Check Typings",
+      "type": "process",
+      "args": [
+        "--skipLibCheck",
+        "false",
+        "--noEmit"
+      ],
+      "problemMatcher": []
+    }
+  ]
+}

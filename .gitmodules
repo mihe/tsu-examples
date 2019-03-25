@@ -1,0 +1,4 @@
+[submodule "Plugins/TSU"]
+	path = Plugins/TSU
+	url = git@github.com:mihe/tsu.git
+	branch = master

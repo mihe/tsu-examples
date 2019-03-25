@@ -1,0 +1,37 @@
+{
+  "compilerOptions": {
+    "baseUrl": ".",
+    "rootDir": ".",
+    "sourceRoot": ".",
+    "target": "es2016",
+    "module": "commonjs",
+    "inlineSourceMap": true,
+    "noEmitOnError": true,
+    "noFallthroughCasesInSwitch": true,
+    "noImplicitReturns": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "pretty": false,
+    "removeComments": true,
+    "skipLibCheck": true,
+    "strict": true,
+    "lib": [
+      "es2016"
+    ],
+    "paths": {
+      "UE/*": [
+        "../../Intermediate/Typings/*"
+      ]
+    },
+    "typeRoots": [
+      "../../Intermediate/Typings",
+      "./node_modules/@types"
+    ],
+    "types": [
+      "TsuGlobals"
+    ]
+  },
+  "include": [
+    "./Source/**/*"
+  ]
+}

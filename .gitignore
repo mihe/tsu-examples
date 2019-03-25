@@ -1,0 +1,33 @@
+# Project
+**/.vs/
+**/Binaries/
+**/Intermediate/
+**/Saved/
+**/node_modules/
+/Source/
+/TsuExamples.code-workspace
+/TsuExamples.sln
+
+# Windows
+Thumbs.db
+*.lnk
+
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+._*
+
+# Linux
+*~
+.fuse_hidden*
+.directory
+.Trash-*
+.nfs*
+
+# Misc
+*.bak
+*.gho
+*.ori
+*.orig
+*.tmp
