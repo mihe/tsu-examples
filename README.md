@@ -10,7 +10,7 @@ This project is based on the Blueprint Input level in the [Content Examples][cex
 
 Please note that **currently**...
 
-- TSU is in its **alpha** stage
+- TSU is in **alpha**
 - TSU has **only** been tested with **Unreal Engine 4.21**
 - You can **not** use TSU outside of Win64 **editor** builds
 - You can **not** use TSU in packaged/cooked builds
