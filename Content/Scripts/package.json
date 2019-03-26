@@ -1,8 +1,8 @@
 {
   "private": true,
   "devDependencies": {
-    "tslint": "5.13.1",
-    "typescript": "3.3.3333"
+    "tslint": "5.14.0",
+    "typescript": "3.3.4000"
   },
   "dependencies": {}
 }
