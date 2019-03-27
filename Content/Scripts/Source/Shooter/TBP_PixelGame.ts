@@ -35,8 +35,8 @@ export function startGame(target: BP_PixelGame) {
 	target.nextSpawnTime = KSystem.getGameTimeInSeconds() + target.spawnInterval;
 
 	const controller = GameplayStatics.getPlayerController(0);
-	const transform = target.playerSpawnPoint.getComponentToWorld();
-	const playerShip = target.spawnPlayer(transform);
+	const spawnTransform = target.playerSpawnPoint.getComponentToWorld();
+	const playerShip = target.spawnPlayer(spawnTransform);
 
 	playerShip.onDestroyed.add(() => onPlayerDestroyed(target));
 
@@ -142,21 +142,12 @@ function onPlayerDestroyed(target: BP_PixelGame) {
 	resetGame(target);
 }
 
-function removeEnemy(target: BP_PixelGame, other: BP_PixelShipEnemy) {
+function removeEnemy(target: BP_PixelGame, enemy: BP_PixelShipEnemy) {
 	const { spawnedEnemies } = target;
 
-	let index = -1;
-	for (const [i, enemy] of spawnedEnemies.entries()) {
-		if (other.equals(enemy)) {
-			index = i;
-
-			if (enemy.isValid()) {
-				enemy.destroyActor();
-			}
-		}
-	}
-
-	if (index >= 0) {
+	const index = spawnedEnemies.findIndex(e => e.equals(enemy));
+	if (index !== -1) {
+		enemy.destroyActor();
 		spawnedEnemies.splice(index, 1);
 	}
 }
