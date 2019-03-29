@@ -114,7 +114,8 @@ function trySpawnEnemy(target: BP_PixelGame) {
 	const enemy = target.spawnEnemy(enemyTransform);
 
 	enemy.onDestroyed.add(actor => {
-		onEnemyDestroyed(target, actor as BP_PixelShipEnemy);
+		playCameraShake(target, 3);
+		removeEnemy(target, actor as BP_PixelShipEnemy);
 	});
 
 	target.spawnedEnemies.push(enemy);
@@ -126,11 +127,6 @@ function trySpawnEnemy(target: BP_PixelGame) {
 
 	target.nextSpawnTime = currentTime + spawnDelay;
 	target.spawnInterval = KMath.fmax(target.spawnInterval - 0.3, 0.7);
-}
-
-function onEnemyDestroyed(target: BP_PixelGame, enemy: BP_PixelShipEnemy) {
-	playCameraShake(target, 3);
-	removeEnemy(target, enemy);
 }
 
 function onPlayerDestroyed(target: BP_PixelGame) {
@@ -147,13 +143,12 @@ function removeEnemy(target: BP_PixelGame, enemy: BP_PixelShipEnemy) {
 
 	const index = spawnedEnemies.findIndex(e => e.equals(enemy));
 	if (index !== -1) {
-		enemy.destroyActor();
 		spawnedEnemies.splice(index, 1);
 	}
 }
 
-export function onBottomOverlap(target: BP_PixelGame, other: Actor) {
+export function onBottomOverlap(other: Actor) {
 	if (other instanceof BP_PixelShipEnemy) {
-		removeEnemy(target, other);
+		other.destroyActor();
 	}
 }
