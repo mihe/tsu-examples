@@ -1,6 +1,6 @@
 # License
 
-Except as otherwise noted (below and/or in individual files/directories), this project carries the following license:
+Except as otherwise noted (below and/or in individual files/directories), this software carries the following license:
 
 ```txt
 Copyright 2019 Mikael Hermansson and other contributors.
