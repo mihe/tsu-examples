@@ -1,6 +1,6 @@
 import { Actor } from 'UE/Actor';
 import { BP_PixelProjectile } from 'UE/BP_PixelProjectile';
-import { GameplayStatics } from 'UE/GameplayStatics';
+import { GameplayStatics as KGameplay } from 'UE/GameplayStatics';
 import { Rotator } from 'UE/Rotator';
 import { Vector } from 'UE/Vector';
 
@@ -28,7 +28,7 @@ export function onImpact(target: BP_PixelProjectile, other: Actor) {
 
 	other.applyDamage(20, null, null, null);
 
-	GameplayStatics.spawnEmitterAtLocation(
+	KGameplay.spawnEmitterAtLocation(
 		target.impactEffect,
 		target.getActorLocation(),
 		new Rotator(0, 0, 0),

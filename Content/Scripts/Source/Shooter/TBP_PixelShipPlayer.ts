@@ -1,11 +1,9 @@
 import { BP_PixelShipPlayer } from 'UE/BP_PixelShipPlayer';
 import { GameplayStatics } from 'UE/GameplayStatics';
-import { KismetMathLibrary } from 'UE/KismetMathLibrary';
+import { KismetMathLibrary as KMath } from 'UE/KismetMathLibrary';
 import { Rotator } from 'UE/Rotator';
 import { TimelineComponent } from 'UE/TimelineComponent';
 import { Vector } from 'UE/Vector';
-
-const KMath = KismetMathLibrary;
 
 const trackName = 'Movement';
 

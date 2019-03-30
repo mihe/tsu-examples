@@ -3,14 +3,12 @@ import { BP_Saucer } from 'UE/BP_Saucer';
 import { EAttachLocation } from 'UE/EAttachLocation';
 import { GameplayStatics } from 'UE/GameplayStatics';
 import { HitResult } from 'UE/HitResult';
-import { KismetMathLibrary } from 'UE/KismetMathLibrary';
+import { KismetMathLibrary as KMath } from 'UE/KismetMathLibrary';
 import { ParticleSystem } from 'UE/ParticleSystem';
 import { Rotator } from 'UE/Rotator';
 import { SceneComponent } from 'UE/SceneComponent';
 import { StaticMeshActor } from 'UE/StaticMeshActor';
 import { Vector } from 'UE/Vector';
-
-const KMath = KismetMathLibrary;
 
 const beamOpacityParam = 'Opacity';
 const socketEvacZone = 'Evac zone';

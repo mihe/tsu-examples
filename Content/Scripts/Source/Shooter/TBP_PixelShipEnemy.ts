@@ -1,15 +1,12 @@
 import { Actor } from 'UE/Actor';
 import { BP_PixelShipEnemy } from 'UE/BP_PixelShipEnemy';
 import { GameplayStatics } from 'UE/GameplayStatics';
-import { KismetMathLibrary } from 'UE/KismetMathLibrary';
-import { KismetSystemLibrary } from 'UE/KismetSystemLibrary';
+import { KismetMathLibrary as KMath } from 'UE/KismetMathLibrary';
+import { KismetSystemLibrary as KSystem } from 'UE/KismetSystemLibrary';
 import { Pawn } from 'UE/Pawn';
 import { Rotator } from 'UE/Rotator';
 import { TimelineComponent } from 'UE/TimelineComponent';
 import { Vector } from 'UE/Vector';
-
-const KMath = KismetMathLibrary;
-const KSystem = KismetSystemLibrary;
 
 const trackName = 'Movement';
 

@@ -3,14 +3,11 @@ import { BP_PixelGame } from 'UE/BP_PixelGame';
 import { BP_PixelShipEnemy } from 'UE/BP_PixelShipEnemy';
 import { EViewTargetBlendFunction } from 'UE/EViewTargetBlendFunction';
 import { GameplayStatics } from 'UE/GameplayStatics';
-import { KismetMathLibrary } from 'UE/KismetMathLibrary';
-import { KismetSystemLibrary } from 'UE/KismetSystemLibrary';
+import { KismetMathLibrary as KMath } from 'UE/KismetMathLibrary';
+import { KismetSystemLibrary as KSystem } from 'UE/KismetSystemLibrary';
 import { TimelineComponent } from 'UE/TimelineComponent';
 import { Transform } from 'UE/Transform';
 import { Vector } from 'UE/Vector';
-
-const KMath = KismetMathLibrary;
-const KSystem = KismetSystemLibrary;
 
 const cameraShakeTrack = 'Offset';
 
