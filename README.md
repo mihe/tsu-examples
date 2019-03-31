@@ -29,4 +29,4 @@ This project is licensed under the 3-clause BSD license. See the [LICENSE][lic] 
 [dsc]: https://discord.gg/QPrNpAQ
 [lic]: LICENSE.md
 [rls]: https://github.com/mihe/tsu-examples/releases
-[tsu]: https://github.com/mihe/tsu/tree/master
+[tsu]: https://github.com/mihe/tsu
