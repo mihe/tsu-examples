@@ -61,7 +61,7 @@ export function quitGame(target: BP_PixelGame) {
 
 function resetGame(target: BP_PixelGame) {
 	for (const enemy of target.spawnedEnemies) {
-		if (enemy.isValid()) {
+		if (enemy && enemy.isValid()) {
 			enemy.destroyActor();
 		}
 	}
@@ -110,9 +110,8 @@ function trySpawnEnemy(target: BP_PixelGame) {
 
 	const enemy = target.spawnEnemy(enemyTransform);
 
-	enemy.onDestroyed.add(actor => {
+	enemy.onDestroyed.add(() => {
 		playCameraShake(target, 3);
-		removeEnemy(target, actor as BP_PixelShipEnemy);
 	});
 
 	target.spawnedEnemies.push(enemy);
@@ -133,15 +132,6 @@ function onPlayerDestroyed(target: BP_PixelGame) {
 	controller.setViewTargetWithBlend(target);
 
 	resetGame(target);
-}
-
-function removeEnemy(target: BP_PixelGame, enemy: BP_PixelShipEnemy) {
-	const { spawnedEnemies } = target;
-
-	const index = spawnedEnemies.findIndex(e => e.equals(enemy));
-	if (index !== -1) {
-		spawnedEnemies.splice(index, 1);
-	}
 }
 
 export function onBottomOverlap(other: Actor) {
