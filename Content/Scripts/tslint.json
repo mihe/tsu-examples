@@ -49,7 +49,6 @@
     "restrict-plus-operands": true,
     "return-undefined": true,
     "semicolon": [true, "always"],
-    "strict-type-predicates": true,
     "triple-equals": [true, "allow-null-check", "allow-undefined-check"],
     "unnecessary-bind": true,
     "use-isnan": true,
