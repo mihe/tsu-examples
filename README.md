@@ -20,6 +20,21 @@ Hopefully all of these issues will be resolved soon, but please be aware of them
 
 If you still want to try it, head over to [Releases][rls].
 
+## Building
+
+_(This only applies if you're **not** using the pre-built binaries found in [Releases][rls])._
+
+- Make sure you have [Visual Studio][vss] installed.
+- Clone this project **recursively**...
+    - `git clone --recursive https://github.com/mihe/tsu-examples.git TsuExamples`
+- Build from Visual Studio...
+    - Generate project files from the context menu of the `.uproject` file
+    - Set configuration to `Development Editor`
+    - Set platform to `Win64`
+    - Run `Build Solution` from the `Build` menu
+- OR build from command-line...
+    - `UnrealBuildTool.exe "C:\Path\To\TsuExamples.uproject" TsuExamplesEditor Win64 Development`
+
 ## License
 
 This project is licensed under the 3-clause BSD license. See the [LICENSE][lic] file for details.
@@ -30,3 +45,4 @@ This project is licensed under the 3-clause BSD license. See the [LICENSE][lic] 
 [lic]: LICENSE.md
 [rls]: https://github.com/mihe/tsu-examples/releases
 [tsu]: https://github.com/mihe/tsu
+[vss]: https://docs.unrealengine.com/en-us/Programming/Development/VisualStudioSetup
