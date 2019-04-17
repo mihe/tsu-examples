@@ -10,6 +10,14 @@ import { SceneComponent } from 'UE/SceneComponent';
 import { StaticMeshActor } from 'UE/StaticMeshActor';
 import { Vector } from 'UE/Vector';
 
+interface Inputs {
+	forward: number;
+	right: number;
+	up: number;
+	pitch: number;
+	yaw: number;
+}
+
 const beamOpacityParam = 'Opacity';
 const socketEvacZone = 'Evac zone';
 
@@ -29,11 +37,27 @@ export function disableBeam(target: BP_Saucer) {
 	target.beamMaterial.setScalarParameterValue(beamOpacityParam, 0.01);
 }
 
-export function tick(target: BP_Saucer, deltaTime: number) {
+export function tick(
+	target: BP_Saucer,
+	deltaTime: number,
+	inputForward: number,
+	inputRight: number,
+	inputUp: number,
+	inputPitch: number,
+	inputYaw: number
+) {
+	const inputs: Inputs = {
+		forward: inputForward,
+		right: inputRight,
+		up: inputUp,
+		pitch: inputPitch,
+		yaw: inputYaw
+	};
+
 	spinTop(target, deltaTime);
-	updateVelocity(target, deltaTime);
-	updateSpringArm(target, deltaTime);
-	updateCameraAndBody(target, deltaTime);
+	updateVelocity(target, deltaTime, inputs);
+	updateSpringArm(target, deltaTime, inputs);
+	updateCameraAndBody(target, deltaTime, inputs);
 	updateFieldOfView(target, deltaTime);
 	tryAbduct(target, deltaTime);
 }
@@ -42,29 +66,19 @@ function spinTop(target: BP_Saucer, deltaTime: number) {
 	target.top.addRelativeRotation(new Rotator(0, 0, 180 * deltaTime));
 }
 
-function updateVelocity(target: BP_Saucer, deltaTime: number) {
-	const inputs = new Vector(
-		target.axisMoveForward,
-		target.axisMoveRight,
-		target.axisMoveUp
-	);
-
+function updateVelocity(target: BP_Saucer, deltaTime: number, inputs: Inputs) {
+	const inputVector = new Vector(inputs.forward, inputs.right, inputs.up);
 	const cameraYaw = target.camera.getComponentRotation().yaw;
 	const newVelocity = new Rotator(0, 0, cameraYaw)
-		.rotateVector(inputs)
+		.rotateVector(inputVector)
 		.multiplyFloat(target.movementSpeed * deltaTime)
 		.add(target.getVelocity());
 
 	target.body.setPhysicsLinearVelocity(newVelocity);
 }
 
-function updateSpringArm(target: BP_Saucer, deltaTime: number) {
-	const {
-		springArm,
-		cameraSpeed,
-		axisLookUp,
-		axisTurn
-	} = target;
+function updateSpringArm(target: BP_Saucer, deltaTime: number, inputs: Inputs) {
+	const { springArm, cameraSpeed } = target;
 
 	const currentRotation = springArm.getComponentToWorld().rotation;
 	const currentYaw = currentRotation.yaw;
@@ -72,23 +86,17 @@ function updateSpringArm(target: BP_Saucer, deltaTime: number) {
 
 	const cameraSpeedInv = cameraSpeed * -1;
 
-	const targetYaw = currentYaw + (cameraSpeed * axisTurn);
-	let targetPitch = currentPitch + (cameraSpeedInv * axisLookUp);
+	const targetYaw = currentYaw + (cameraSpeed * inputs.yaw);
+	let targetPitch = currentPitch + (cameraSpeedInv * inputs.pitch);
 	targetPitch = KMath.clampAngle(targetPitch, -45, 85);
 
 	const targetRotation = new Rotator(0, targetPitch, targetYaw);
-
-	const newRotation = KMath.rinterpTo(
-		currentRotation,
-		targetRotation,
-		deltaTime,
-		8
-	);
+	const newRotation = currentRotation.interpTo(targetRotation, deltaTime, 8);
 
 	springArm.setWorldRotation(newRotation);
 }
 
-function updateCameraAndBody(target: BP_Saucer, deltaTime: number) {
+function updateCameraAndBody(target: BP_Saucer, deltaTime: number, inputs: Inputs) {
 	const { camera } = target;
 	const currentCameraTransform = camera.getComponentToWorld();
 	const currentCameraLocation = currentCameraTransform.location;
@@ -98,54 +106,25 @@ function updateCameraAndBody(target: BP_Saucer, deltaTime: number) {
 	const currentBodyLocation = currentBodyTransform.location;
 	const currentBodyRotation = currentBodyTransform.rotation;
 
-	const targetCameraRotation = KMath.findLookAtRotation(
-		currentCameraLocation,
-		currentBodyLocation
-	);
-
-	const newCameraRotation = KMath.rinterpTo(
-		currentCameraRotation,
-		targetCameraRotation,
-		deltaTime,
-		2
-	);
+	const targetCameraRotation = KMath.findLookAtRotation(currentCameraLocation, currentBodyLocation);
+	const newCameraRotation = currentCameraRotation.interpTo(targetCameraRotation, deltaTime, 2);
 
 	camera.setWorldRotation(newCameraRotation);
 
-	const targetBodyRoll = target.axisMoveRight * 20;
-	const targetBodyPitch = target.axisMoveForward * -7;
-	const targetBodyRotation = new Rotator(
-		targetBodyRoll,
-		targetBodyPitch,
-		targetCameraRotation.yaw
-	);
-
-	const newBodyRotation = KMath.rinterpTo(
-		currentBodyRotation,
-		targetBodyRotation,
-		deltaTime,
-		4
-	);
+	const targetBodyRoll = inputs.right * 20;
+	const targetBodyPitch = inputs.forward * -7;
+	const targetBodyRotation = new Rotator(targetBodyRoll, targetBodyPitch, targetCameraRotation.yaw);
+	const newBodyRotation = currentBodyRotation.interpTo(targetBodyRotation, deltaTime, 4);
 
 	target.setActorRotation(newBodyRotation);
 }
 
 function updateFieldOfView(target: BP_Saucer, deltaTime: number) {
 	const speed = target.getVelocity().size();
-	const targetFov = KMath.mapRangeClamped(speed,
-		300,
-		1000,
-		75,
-		110
-	);
+	const targetFov = KMath.mapRangeClamped(speed, 300, 1000, 75, 110);
 
 	const { camera } = target;
-	camera.fieldOfView = KMath.finterpTo(
-		camera.fieldOfView,
-		targetFov,
-		deltaTime,
-		8
-	);
+	camera.fieldOfView = KMath.finterpTo(camera.fieldOfView, targetFov, deltaTime, 8);
 }
 
 function tryAbduct(target: BP_Saucer, deltaTime: number) {
@@ -167,12 +146,7 @@ function tryAbduct(target: BP_Saucer, deltaTime: number) {
 			.multiply(new Vector(1, 1, 0.3))
 			.multiplyFloat(target.beamStrength);
 
-		const newVelocity = KMath.vinterpTo(
-			currentVelocity,
-			targetVelocity,
-			deltaTime,
-			5
-		);
+		const newVelocity = currentVelocity.interpTo(targetVelocity, deltaTime, 5);
 
 		actor.staticMeshComponent.setPhysicsLinearVelocity(newVelocity);
 	}
@@ -184,8 +158,7 @@ export function tryBoost(target: BP_Saucer) {
 	const { body, movementSpeed } = target;
 	const { rotation } = body.getComponentToWorld();
 	const forward = rotation.getForwardVector();
-	const newVelocity = forward.withZ(0)
-		.multiplyFloat(movementSpeed * 2);
+	const newVelocity = forward.withZ(0).multiplyFloat(movementSpeed * 2);
 
 	body.setPhysicsLinearVelocity(newVelocity);
 

@@ -50,12 +50,7 @@ export function tick(target: BP_PixelShipPlayer) {
 
 	const step = target.axisMoveRight * target.movementSpeed;
 	const desiredSpeed = step * deltaSeconds;
-	target.speed = KMath.finterpTo(
-		target.speed,
-		desiredSpeed,
-		deltaSeconds,
-		4
-	);
+	target.speed = KMath.finterpTo(target.speed, desiredSpeed, deltaSeconds, 4);
 
 	const velocity = new Vector(target.speed, 0, 0);
 	const cabinetRotation = new Rotator(0, 0, target.gameCabinetYaw);
@@ -66,12 +61,7 @@ export function tick(target: BP_PixelShipPlayer) {
 	const yaw = target.gameCabinetYaw + (target.speed * -5);
 	const targetRotation = new Rotator(0, 0, yaw);
 	const currentRotation = target.getActorRotation();
-	const newRotation = KMath.rinterpTo(
-		currentRotation,
-		targetRotation,
-		deltaSeconds,
-		20
-	);
+	const newRotation = currentRotation.interpTo(targetRotation, deltaSeconds, 20);
 
 	target.setActorRotation(newRotation);
 }
