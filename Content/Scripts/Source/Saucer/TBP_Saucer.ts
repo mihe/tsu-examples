@@ -3,7 +3,7 @@ import { BP_Saucer } from 'UE/BP_Saucer';
 import { EAttachLocation } from 'UE/EAttachLocation';
 import { GameplayStatics as KGameplay } from 'UE/GameplayStatics';
 import { HitResult } from 'UE/HitResult';
-import { KismetMathLibrary as KMath } from 'UE/KismetMathLibrary';
+import { MathLibrary as KMath } from 'UE/MathLibrary';
 import { ParticleSystem } from 'UE/ParticleSystem';
 import { Rotator } from 'UE/Rotator';
 import { SceneComponent } from 'UE/SceneComponent';
@@ -120,7 +120,7 @@ function updateCameraAndBody(target: BP_Saucer, deltaTime: number, inputs: Input
 }
 
 function updateFieldOfView(target: BP_Saucer, deltaTime: number) {
-	const speed = target.getVelocity().size();
+	const speed = target.getVelocity().length();
 	const targetFov = KMath.mapRangeClamped(speed, 300, 1000, 75, 110);
 
 	const { camera } = target;
@@ -239,7 +239,7 @@ function interruptBeam(target: BP_Saucer) {
 }
 
 export function onImpact(target: BP_Saucer, hit: HitResult) {
-	if (target.getVelocity().size() >= 300) {
+	if (target.getVelocity().length() >= 300) {
 		spawnEmitterAtLocation(target.impactEffect, hit.impactPoint);
 	}
 }

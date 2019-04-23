@@ -1,10 +1,10 @@
 import { Actor } from 'UE/Actor';
 import { BP_PixelShipEnemy } from 'UE/BP_PixelShipEnemy';
 import { GameplayStatics as KGameplay } from 'UE/GameplayStatics';
-import { KismetMathLibrary as KMath } from 'UE/KismetMathLibrary';
-import { KismetSystemLibrary as KSystem } from 'UE/KismetSystemLibrary';
+import { MathLibrary as KMath } from 'UE/MathLibrary';
 import { Pawn } from 'UE/Pawn';
 import { Rotator } from 'UE/Rotator';
+import { SystemLibrary as KSystem } from 'UE/SystemLibrary';
 import { TimelineComponent } from 'UE/TimelineComponent';
 import { Vector } from 'UE/Vector';
 

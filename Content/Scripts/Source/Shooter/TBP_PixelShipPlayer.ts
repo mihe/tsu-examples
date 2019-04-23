@@ -1,6 +1,6 @@
 import { BP_PixelShipPlayer } from 'UE/BP_PixelShipPlayer';
 import { GameplayStatics as KGameplay } from 'UE/GameplayStatics';
-import { KismetMathLibrary as KMath } from 'UE/KismetMathLibrary';
+import { MathLibrary as KMath } from 'UE/MathLibrary';
 import { Rotator } from 'UE/Rotator';
 import { TimelineComponent } from 'UE/TimelineComponent';
 import { Vector } from 'UE/Vector';
@@ -87,7 +87,7 @@ function fireProjectile(target: BP_PixelShipPlayer) {
 
 export function stopFiring(target: BP_PixelShipPlayer) {
 	const { fireTimerHandle } = target;
-	if (fireTimerHandle.isValid()) {
+	if (fireTimerHandle.isValidTimerHandle()) {
 		clearInterval(fireTimerHandle);
 	}
 }
