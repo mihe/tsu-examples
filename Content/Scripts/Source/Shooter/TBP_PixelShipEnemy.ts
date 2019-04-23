@@ -1,6 +1,6 @@
 import { Actor } from 'UE/Actor';
 import { BP_PixelShipEnemy } from 'UE/BP_PixelShipEnemy';
-import { GameplayStatics } from 'UE/GameplayStatics';
+import { GameplayStatics as KGameplay } from 'UE/GameplayStatics';
 import { KismetMathLibrary as KMath } from 'UE/KismetMathLibrary';
 import { KismetSystemLibrary as KSystem } from 'UE/KismetSystemLibrary';
 import { Pawn } from 'UE/Pawn';
@@ -73,7 +73,7 @@ function tryFireProjectile(target: BP_PixelShipEnemy) {
 	const currentTime = KSystem.getGameTimeInSeconds();
 	if (currentTime < target.nextProjectileTime) { return; }
 
-	const pawn = GameplayStatics.getPlayerPawn(0);
+	const pawn = KGameplay.getPlayerPawn(0);
 	const pawnLocation = pawn.getActorLocation();
 	const targetLocation = target.getActorLocation();
 	const targetToPawn = pawnLocation.subtract(targetLocation);
@@ -108,7 +108,7 @@ export function onDamage(target: BP_PixelShipEnemy, damage: number) {
 }
 
 function destroy(target: BP_PixelShipEnemy) {
-	GameplayStatics.spawnEmitterAtLocation(
+	KGameplay.spawnEmitterAtLocation(
 		target.destroyedEffect,
 		target.getActorLocation(),
 		new Rotator(0, 0, 0),

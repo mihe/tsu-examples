@@ -2,7 +2,7 @@ import { Actor } from 'UE/Actor';
 import { BP_PixelGame } from 'UE/BP_PixelGame';
 import { BP_PixelShipEnemy } from 'UE/BP_PixelShipEnemy';
 import { EViewTargetBlendFunction } from 'UE/EViewTargetBlendFunction';
-import { GameplayStatics } from 'UE/GameplayStatics';
+import { GameplayStatics as KGameplay } from 'UE/GameplayStatics';
 import { KismetMathLibrary as KMath } from 'UE/KismetMathLibrary';
 import { KismetSystemLibrary as KSystem } from 'UE/KismetSystemLibrary';
 import { TimelineComponent } from 'UE/TimelineComponent';
@@ -31,7 +31,7 @@ export function startGame(target: BP_PixelGame) {
 	target.spawningEnemies = true;
 	target.nextSpawnTime = KSystem.getGameTimeInSeconds() + target.spawnInterval;
 
-	const controller = GameplayStatics.getPlayerController(0);
+	const controller = KGameplay.getPlayerController(0);
 	const spawnTransform = target.playerSpawnPoint.getComponentToWorld();
 	const playerShip = target.spawnPlayer(spawnTransform);
 
@@ -128,7 +128,7 @@ function trySpawnEnemy(target: BP_PixelGame) {
 function onPlayerDestroyed(target: BP_PixelGame) {
 	target.spawningEnemies = false;
 
-	const controller = GameplayStatics.getPlayerController(0);
+	const controller = KGameplay.getPlayerController(0);
 	controller.setViewTargetWithBlend(target);
 
 	resetGame(target);

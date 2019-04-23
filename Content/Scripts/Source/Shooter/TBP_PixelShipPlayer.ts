@@ -1,5 +1,5 @@
 import { BP_PixelShipPlayer } from 'UE/BP_PixelShipPlayer';
-import { GameplayStatics } from 'UE/GameplayStatics';
+import { GameplayStatics as KGameplay } from 'UE/GameplayStatics';
 import { KismetMathLibrary as KMath } from 'UE/KismetMathLibrary';
 import { Rotator } from 'UE/Rotator';
 import { TimelineComponent } from 'UE/TimelineComponent';
@@ -46,7 +46,7 @@ function onAnimate(target: BP_PixelShipPlayer, alpha: number) {
 export function tick(target: BP_PixelShipPlayer) {
 	if (!target.movementEnabled) { return; }
 
-	const deltaSeconds = GameplayStatics.getWorldDeltaSeconds();
+	const deltaSeconds = KGameplay.getWorldDeltaSeconds();
 
 	const step = target.axisMoveRight * target.movementSpeed;
 	const desiredSpeed = step * deltaSeconds;
@@ -97,7 +97,7 @@ export function onDamage(target: BP_PixelShipPlayer, damage: number) {
 	target.health -= damage;
 
 	if (target.health <= 0) {
-		GameplayStatics.spawnEmitterAtLocation(
+		KGameplay.spawnEmitterAtLocation(
 			target.destroyedEffect,
 			target.getActorLocation(),
 			new Rotator(0, 0, 0),

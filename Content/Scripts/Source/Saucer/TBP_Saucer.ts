@@ -1,7 +1,7 @@
 import { Actor } from 'UE/Actor';
 import { BP_Saucer } from 'UE/BP_Saucer';
 import { EAttachLocation } from 'UE/EAttachLocation';
-import { GameplayStatics } from 'UE/GameplayStatics';
+import { GameplayStatics as KGameplay } from 'UE/GameplayStatics';
 import { HitResult } from 'UE/HitResult';
 import { KismetMathLibrary as KMath } from 'UE/KismetMathLibrary';
 import { ParticleSystem } from 'UE/ParticleSystem';
@@ -250,7 +250,7 @@ function spawnEmitterAttached(
 	locationType = EAttachLocation.KeepRelativeOffset,
 	location = new Vector(0, 0, 0)
 ) {
-	return GameplayStatics.spawnEmitterAttached(
+	return KGameplay.spawnEmitterAttached(
 		template,
 		attachTo,
 		'',
@@ -263,7 +263,7 @@ function spawnEmitterAttached(
 }
 
 function spawnEmitterAtLocation(template: ParticleSystem, location: Vector) {
-	return GameplayStatics.spawnEmitterAtLocation(
+	return KGameplay.spawnEmitterAtLocation(
 		template,
 		location,
 		new Rotator(0, 0, 0),
