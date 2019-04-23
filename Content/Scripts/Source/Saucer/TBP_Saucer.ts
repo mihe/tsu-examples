@@ -68,7 +68,7 @@ function spinTop(target: BP_Saucer, deltaTime: number) {
 
 function updateVelocity(target: BP_Saucer, deltaTime: number, inputs: Inputs) {
 	const inputVector = new Vector(inputs.forward, inputs.right, inputs.up);
-	const cameraYaw = target.camera.getComponentRotation().yaw;
+	const cameraYaw = target.camera.getWorldRotation().yaw;
 	const newVelocity = new Rotator(0, 0, cameraYaw)
 		.rotateVector(inputVector)
 		.multiplyFloat(target.movementSpeed * deltaTime)
@@ -80,7 +80,7 @@ function updateVelocity(target: BP_Saucer, deltaTime: number, inputs: Inputs) {
 function updateSpringArm(target: BP_Saucer, deltaTime: number, inputs: Inputs) {
 	const { springArm, cameraSpeed } = target;
 
-	const currentRotation = springArm.getComponentToWorld().rotation;
+	const currentRotation = springArm.getWorldTransform().rotation;
 	const currentYaw = currentRotation.yaw;
 	const currentPitch = currentRotation.pitch;
 
@@ -98,11 +98,11 @@ function updateSpringArm(target: BP_Saucer, deltaTime: number, inputs: Inputs) {
 
 function updateCameraAndBody(target: BP_Saucer, deltaTime: number, inputs: Inputs) {
 	const { camera } = target;
-	const currentCameraTransform = camera.getComponentToWorld();
+	const currentCameraTransform = camera.getWorldTransform();
 	const currentCameraLocation = currentCameraTransform.location;
 	const currentCameraRotation = currentCameraTransform.rotation;
 
-	const currentBodyTransform = target.body.getComponentToWorld();
+	const currentBodyTransform = target.body.getWorldTransform();
 	const currentBodyLocation = currentBodyTransform.location;
 	const currentBodyRotation = currentBodyTransform.rotation;
 
@@ -156,7 +156,7 @@ export function tryBoost(target: BP_Saucer) {
 	if (!target.boostReady) { return; }
 
 	const { body, movementSpeed } = target;
-	const { rotation } = body.getComponentToWorld();
+	const { rotation } = body.getWorldTransform();
 	const forward = rotation.getForwardVector();
 	const newVelocity = forward.withZ(0).multiplyFloat(movementSpeed * 2);
 

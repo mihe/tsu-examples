@@ -80,7 +80,7 @@ function tryFireProjectile(target: BP_PixelShipEnemy) {
 	if (targetToPawn.x > 120) { return; }
 
 	target.spawnProjectile(
-		target.getTransform(),
+		target.getActorTransform(),
 		new Vector(0, 0, -200),
 		target,
 		KMath.makeColor(1, 0.3, 0.05)

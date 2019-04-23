@@ -2,7 +2,7 @@ import { BP_PixelDude } from 'UE/BP_PixelDude';
 import { Vector } from 'UE/Vector';
 
 export function construct(target: BP_PixelDude) {
-	target.initialCharacterTransform = target.getTransform();
+	target.initialCharacterTransform = target.getActorTransform();
 }
 
 export function onInput(target: BP_PixelDude, right: number, up: number) {

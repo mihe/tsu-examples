@@ -32,7 +32,7 @@ export function startGame(target: BP_PixelGame) {
 	target.nextSpawnTime = KSystem.getGameTimeInSeconds() + target.spawnInterval;
 
 	const controller = KGameplay.getPlayerController(0);
-	const spawnTransform = target.playerSpawnPoint.getComponentToWorld();
+	const spawnTransform = target.playerSpawnPoint.getWorldTransform();
 	const playerShip = target.spawnPlayer(spawnTransform);
 
 	playerShip.onDestroyed.add(() => onPlayerDestroyed(target));
@@ -91,7 +91,7 @@ function trySpawnEnemy(target: BP_PixelGame) {
 	const currentTime = KSystem.getGameTimeInSeconds();
 	if (currentTime < target.nextSpawnTime) { return; }
 
-	const spawnTransform = target.enemySpawnPoint.getComponentToWorld();
+	const spawnTransform = target.enemySpawnPoint.getWorldTransform();
 
 	const spawnOffsetY = KMath.randomFloatInRange(
 		target.maxHorizontalSpawnOffset,

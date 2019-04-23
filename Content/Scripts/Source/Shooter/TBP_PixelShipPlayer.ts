@@ -78,7 +78,7 @@ export function startFiring(target: BP_PixelShipPlayer) {
 
 function fireProjectile(target: BP_PixelShipPlayer) {
 	target.spawnProjectile(
-		target.getTransform(),
+		target.getActorTransform(),
 		new Vector(0, 0, 700),
 		target,
 		KMath.makeColor(0.2, 0.5, 1, 1)
