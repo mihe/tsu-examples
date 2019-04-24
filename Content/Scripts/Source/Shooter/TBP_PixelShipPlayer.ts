@@ -34,12 +34,12 @@ function onAnimate(target: BP_PixelShipPlayer, alpha: number) {
 
 	const sourceLocation = spawnLocation;
 	const targetLocation = sourceLocation.add(new Vector(0, 0, 60));
-	const location = KMath.vlerp(sourceLocation, targetLocation, alpha);
+	const location = sourceLocation.lerp(targetLocation, alpha);
 	target.setActorLocation(location);
 
 	const sourceRotation = new Rotator(0, 0, gameCabinetYaw + 720);
 	const targetRotation = new Rotator(0, 0, gameCabinetYaw);
-	const rotation = KMath.rlerp(sourceRotation, targetRotation, alpha, false);
+	const rotation = sourceRotation.lerp(targetRotation, alpha, false);
 	target.setActorRotation(rotation);
 }
 

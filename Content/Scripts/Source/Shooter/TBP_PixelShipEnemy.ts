@@ -42,12 +42,12 @@ function onAnimate(target: BP_PixelShipEnemy, value: number) {
 
 	const sourceLocation = spawnLocation;
 	const targetLocation = sourceLocation.subtract(new Vector(0, 0, 60));
-	const location = KMath.vlerp(sourceLocation, targetLocation, value);
+	const location = sourceLocation.lerp(targetLocation, value);
 	target.setActorLocation(location);
 
 	const sourceRotation = new Rotator(0, 0, gameCabinetYaw + 180);
 	const targetRotation = new Rotator(0, 0, gameCabinetYaw);
-	const rotation = KMath.rlerp(sourceRotation, targetRotation, value, false);
+	const rotation = sourceRotation.lerp(targetRotation, value, false);
 	target.setActorRotation(rotation);
 }
 
