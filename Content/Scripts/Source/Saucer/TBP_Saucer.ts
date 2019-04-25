@@ -240,7 +240,10 @@ function interruptBeam(target: BP_Saucer) {
 
 export function onImpact(target: BP_Saucer, hit: HitResult) {
 	if (target.getVelocity().length() >= 300) {
-		spawnEmitterAtLocation(target.impactEffect, hit.impactPoint);
+		KGameplay.spawnEmitterAtLocation(
+			target.impactEffect,
+			hit.impactPoint
+		);
 	}
 }
 
@@ -253,21 +256,10 @@ function spawnEmitterAttached(
 	return KGameplay.spawnEmitterAttached(
 		template,
 		attachTo,
-		'',
+		undefined,
 		location,
-		new Rotator(0, 0, 0),
-		new Vector(1, 1, 1),
-		locationType,
-		true
-	);
-}
-
-function spawnEmitterAtLocation(template: ParticleSystem, location: Vector) {
-	return KGameplay.spawnEmitterAtLocation(
-		template,
-		location,
-		new Rotator(0, 0, 0),
-		new Vector(1, 1, 1),
-		true
+		undefined,
+		undefined,
+		locationType
 	);
 }

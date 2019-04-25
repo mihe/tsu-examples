@@ -110,9 +110,7 @@ export function onDamage(target: BP_PixelShipEnemy, damage: number) {
 function destroy(target: BP_PixelShipEnemy) {
 	KGameplay.spawnEmitterAtLocation(
 		target.destroyedEffect,
-		target.getActorLocation(),
-		new Rotator(0, 0, 0),
-		new Vector(1, 1, 1)
+		target.getActorLocation()
 	);
 
 	target.destroyActor();

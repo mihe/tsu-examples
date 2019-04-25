@@ -99,9 +99,7 @@ export function onDamage(target: BP_PixelShipPlayer, damage: number) {
 	if (target.health <= 0) {
 		KGameplay.spawnEmitterAtLocation(
 			target.destroyedEffect,
-			target.getActorLocation(),
-			new Rotator(0, 0, 0),
-			new Vector(1, 1, 1)
+			target.getActorLocation()
 		);
 
 		target.destroyActor();
