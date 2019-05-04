@@ -2,7 +2,7 @@
 
 A couple of examples showcasing [TypeScript for Unreal][tsu].
 
-Need help with something? Join us on [Discord][dsc].
+Need help with something? Join us on [Discord][dsc] or the [forums][frm].
 
 This project is based on the Blueprint Input level in the [Content Examples][cex] project and is meant to show the difference between making something in Blueprint versus making something in TypeScript for Unreal.
 
@@ -42,6 +42,7 @@ This project is licensed under the 3-clause BSD license. See the [LICENSE][lic] 
 [bnr]: https://user-images.githubusercontent.com/4884246/54883366-87e36180-4e65-11e9-8bc9-5fdb6b5cd462.png
 [cex]: https://docs.unrealengine.com/en-US/Resources/ContentExamples
 [dsc]: https://discord.gg/QPrNpAQ
+[frm]: https://forums.unrealengine.com/community/work-in-progress/1603304-typescript-for-unreal
 [lic]: LICENSE.md
 [rls]: https://github.com/mihe/tsu-examples/releases
 [tsu]: https://github.com/mihe/tsu
