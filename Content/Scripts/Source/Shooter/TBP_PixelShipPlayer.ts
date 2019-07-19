@@ -11,8 +11,7 @@ export function onBeginPlay(target: BP_PixelShipPlayer) {
 	target.gameCabinetYaw = target.getInstigator().getActorRotation().yaw;
 	target.spawnLocation = target.getActorLocation();
 
-	const spawnAnimation = new TimelineComponent(target);
-	spawnAnimation.registerComponent();
+	const spawnAnimation = TimelineComponent.addTo(target);
 	spawnAnimation.setTimelineLength(1);
 	spawnAnimation.addFloatCurve(trackName, target.spawnAnimationCurve);
 
@@ -25,8 +24,6 @@ export function onBeginPlay(target: BP_PixelShipPlayer) {
 	});
 
 	spawnAnimation.playFromStart();
-
-	target.addOwnedComponent(spawnAnimation);
 }
 
 function onAnimate(target: BP_PixelShipPlayer, alpha: number) {

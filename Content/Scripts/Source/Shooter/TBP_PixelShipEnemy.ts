@@ -19,8 +19,7 @@ export function onBeginPlay(target: BP_PixelShipEnemy) {
 	const projectileDelay = KMath.randomFloatInRange(0.4, 0.8);
 	target.nextProjectileTime = KSystem.getGameTimeInSeconds() + projectileDelay;
 
-	const spawnAnimation = new TimelineComponent(target);
-	spawnAnimation.registerComponent();
+	const spawnAnimation = TimelineComponent.addTo(target);
 	spawnAnimation.setTimelineLength(0.7);
 	spawnAnimation.addFloatCurve(trackName, target.spawnAnimationCurve);
 
@@ -33,8 +32,6 @@ export function onBeginPlay(target: BP_PixelShipEnemy) {
 	});
 
 	spawnAnimation.playFromStart();
-
-	target.addOwnedComponent(spawnAnimation);
 }
 
 function onAnimate(target: BP_PixelShipEnemy, value: number) {

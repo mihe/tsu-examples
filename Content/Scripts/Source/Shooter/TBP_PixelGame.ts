@@ -18,11 +18,9 @@ export function construct(target: BP_PixelGame) {
 }
 
 export function onBeginPlay(target: BP_PixelGame) {
-	const cameraShake = new TimelineComponent(target);
-	cameraShake.registerComponent();
+	const cameraShake = TimelineComponent.addTo(target);
 	cameraShake.setTimelineLength(0.4);
 	cameraShake.addVectorCurve(cameraShakeTrack, target.cameraShakeCurve);
-	target.addOwnedComponent(cameraShake);
 	target.cameraShake = cameraShake;
 }
 

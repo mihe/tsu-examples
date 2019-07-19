@@ -21,8 +21,7 @@ export function move(target: BP_PixelProjectile, deltaSeconds: number) {
 }
 
 export function onImpact(target: BP_PixelProjectile, other: Actor) {
-	const { projectileOwner } = target;
-	if (projectileOwner && projectileOwner.equals(other)) { return; }
+	if (target.projectileOwner.equals(other)) { return; }
 
 	other.applyDamage(20, null, null, null);
 
